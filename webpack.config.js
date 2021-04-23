@@ -2,7 +2,7 @@ const path = require('path');
 const devServerPort = 3000;
 
 module.exports = {
-    entry: path.join(__dirname, './demo/scripts/index.ts'),
+    entry: ["@babel/polyfill", path.join(__dirname, './demo/scripts/index.ts')],
     devtool: 'source-map',
     output: {
         filename: 'demo.js',

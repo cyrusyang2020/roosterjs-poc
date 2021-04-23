@@ -26,6 +26,7 @@
         "publish": "node tools/build.js clean normalize tslint buildcommonjs buildamd dts pack packprod builddemo publish"
     },
     "devDependencies": {
+        "@babel/core": "^7.13.16",
         "@microsoft/loader-load-themed-styles": "1.8.11",
         "@types/dom-inputevent": "1.0.5",
         "@types/jasmine": "3.5.10",
@@ -71,7 +72,7 @@
         }
     },
     "dependencies": {
-        "loadsh": "0.0.4",
+        "@babel/polyfill": "^7.12.1",
         "lodash": "^4.17.21"
     }
 }
