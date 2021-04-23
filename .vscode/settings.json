@@ -1,0 +1,26 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "files.exclude": {
+        "**/.buildcache": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "obj": true,
+        "coverage": true,
+        ".vscode/**": true,
+        "dist/**": true,
+        "stats.json": true
+    },
+    "prettier.arrowParens": "avoid",
+    "prettier.singleQuote": true,
+    "editor.formatOnSave": true,
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
+    "prettier.printWidth": 100,
+    "typescript.extension.sortImports.sortOnSave": true,
+    "prettier.jsxBracketSameLine": true,
+    "typescript.extension.sortImports.maxNamedImportsInSingleLine": 4,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

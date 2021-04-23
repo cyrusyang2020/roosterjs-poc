@@ -1,0 +1,26 @@
+.VariablePicker {
+    border: solid 1px #aaa;
+    background-color: white;
+    box-shadow: 2px 2px 2px #888;
+    color: black;
+    position: absolute;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.VariablePickerItem {
+    padding: 2px;
+    cursor: pointer;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &:hover {
+        background-color: #3344ff;
+        color: white;
+    }
+}
+
+seismic-variable {
+    background: rgba(28, 161, 220, 0.25);
+    cursor: pointer;
+}
