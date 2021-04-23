@@ -46,7 +46,10 @@ export default class MentionPlugin implements EditorPlugin {
     }
     onVariableClick = () => {
         const position = this.editor.getFocusedPosition();
-        if (position.element.nodeName !== 'SEISMIC-VARIABLE') return;
+        if (position.element.nodeName !== 'SEISMIC-VARIABLE') {
+            this.updateRender(false);
+            return;
+        };
         console.log('position', position)
         this.editor.select(position.node, position.node.textContent.length)
         this.updateRender(true, getPositionRect(position), true)
