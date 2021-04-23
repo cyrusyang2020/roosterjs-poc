@@ -40,22 +40,19 @@ export default class MentionPlugin implements EditorPlugin {
         seismicVariableTag.setAttribute('name', item.key);
         seismicVariableTag.contentEditable = "false";
         seismicVariableTag.innerText = `[[${item.label}]]`;
-        seismicVariableTag.addEventListener('click', this.onVariableClick);
 
         this.insertNode(seismicVariableTag);
         this.updateRender(false);
     }
     onVariableClick = () => {
         const position = this.editor.getFocusedPosition();
+        if (position.element.nodeName !== 'SEISMIC-VARIABLE') return;
         console.log('position', position)
         this.editor.select(position.node, position.node.textContent.length)
         this.updateRender(true, getPositionRect(position), true)
     }
     replaceVariable = (item: IItem) => {
         const position = this.editor.getFocusedPosition();
-
-
-        // this.insertNode(seismicVariableTag, position.node.textContent);
         this.editor.addUndoSnapshot(() => {
             position.element.setAttribute('name', item.key);
             position.element.innerText = `[[${item.label}]]`;
@@ -87,12 +84,9 @@ export default class MentionPlugin implements EditorPlugin {
         this.editor = null;
         if (this.mountPoint) {
             ReactDOM.unmountComponentAtNode(this.mountPoint);
-            this.editor.getDocument().body.removeChild(this.mountPoint);
         }
     }
-    replaceNode(htmlNode: Node) {
 
-    }
     insertNode(htmlNode: Node, replaceString = this.triggerString) {
         this.editor.focus();
 
@@ -112,7 +106,20 @@ export default class MentionPlugin implements EditorPlugin {
         );
     }
     onPluginEvent(event: PluginEvent) {
-        this.trigger();
+        const evt: PluginEvent & {
+            rawEvent: Event;
+        } = event as PluginEvent & {
+            rawEvent: Event;
+        };
+        if (evt.rawEvent instanceof KeyboardEvent) {
+            this.trigger();
+        } else if (evt.rawEvent instanceof MouseEvent) {
+            if (evt.rawEvent.type === 'mouseup') {
+                this.onVariableClick();
+            }
+        }
+        console.log('event', event)
+
     }
     getContextMenuItems(node: Node) {
         const items: any[] = [];

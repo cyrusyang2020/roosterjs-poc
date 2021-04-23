@@ -26,7 +26,6 @@ class MainPane extends MainPaneBase {
 
     constructor(props: {}) {
         super(props);
-        debugger;
         this.state = {
             showSidePane: window.location.hash != '',
             showRibbon: true,
