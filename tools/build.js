@@ -221,8 +221,8 @@ function getPackedFileName(isProduction, isAmd) {
 
 async function pack(isProduction, isAmd) {
     var filename = getPackedFileName(isProduction, isAmd);
-    var webpackConfig = {
-        entry: path.join(packagesPath, 'roosterjs/lib/index.ts'),
+    var webpackConfig = { // path.join(packagesPath, 'roosterjs/lib/index.ts')
+        entry: ["@babel/polyfill", path.join(packagesPath, 'roosterjs/lib/index.ts')],
         devtool: 'source-map',
         output: {
             filename,
@@ -325,7 +325,7 @@ async function buildDemoSite() {
     var distPathRoot = path.join(deployPath);
     var filename = 'demo.js';
     var webpackConfig = {
-        entry: path.join(sourcePath, 'index.ts'),
+        entry: ["@babel/polyfill", path.join(sourcePath, 'index.ts')],
         devtool: 'source-map',
         output: {
             filename,
@@ -402,7 +402,7 @@ async function buildDemoSite() {
                 fs.writeFileSync(
                     outputFilename,
                     `window.roosterJsVer = "v${version}";` +
-                        fs.readFileSync(outputFilename).toString()
+                    fs.readFileSync(outputFilename).toString()
                 );
                 resolve();
             }
@@ -425,7 +425,7 @@ function publish() {
         var npmVersion = '';
         try {
             npmVersion = exec(`npm view ${package}@${tagname} version`).toString().trim();
-        } catch (e) {}
+        } catch (e) { }
 
         if (localVersion != npmVersion) {
             let npmrcName = path.join(distPath, package, '.npmrc');
